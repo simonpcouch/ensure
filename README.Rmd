@@ -40,3 +40,5 @@ Once those steps are completed, you're ready to use the testhelper addin with a 
 ## Example
 
 To use the test helper, just trigger the addin (optionally selecting some code to only write tests for a certain portion of the file) and watch your testing code be written.
+
+![](https://raw.githubusercontent.com/simonpcouch/testhelper/refs/heads/main/inst/figs/testhelper.gif)

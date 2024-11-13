@@ -14,8 +14,8 @@ status](https://www.r-pkg.org/badges/version/testhelper)](https://CRAN.R-project
 
 The testhelper package provides an addin for drafting testthat unit
 testing code using LLMs. Triggering the addin will open a corresponding
-test file and begin writing tests into it. The testhelper *test helper* is
-familiar with testthat 3e as well as tidy style, and incorporates
+test file and begin writing tests into it. The testhelper *test helper*
+is familiar with testthat 3e as well as tidy style, and incorporates
 context from the rest of your R package to write concise and relevant
 tests.
 
@@ -33,20 +33,21 @@ variable set, and you’re ready to go. If you’d like to use an LLM other
 than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the
 test helper, see the `test_helper()` documentation.
 
-The test helper is interfaced with the via the RStudio addin “testhelper:
-Test R code.” For easiest access, we recommend registering the testhelper
-addin to a keyboard shortcut. **In RStudio**, navigate to
+The test helper is interfaced with the via the RStudio addin
+“testhelper: Test R code.” For easiest access, we recommend registering
+the testhelper addin to a keyboard shortcut. **In RStudio**, navigate to
 `Tools > Modify Keyboard Shortcuts > Search "testhelper"`—we suggest
-`Ctrl+Alt+T` (or `Ctrl+Cmd+T` on macOS). The test helper is
-currently not available in Positron as Positron has yet to implement
-document `id`s that testhelper needs to toggle between source and test
-files.
+`Ctrl+Alt+T` (or `Ctrl+Cmd+T` on macOS). The test helper is currently
+not available in Positron as Positron has yet to implement document
+`id`s that testhelper needs to toggle between source and test files.
 
 Once those steps are completed, you’re ready to use the testhelper addin
 with a keyboard shortcut.
 
 ## Example
 
-The test helper is created automatically when users interact with the
-testhelper addin. Just highlight some code, trigger the addin, and watch
-your testing code be written.
+To use the test helper, just trigger the addin (optionally selecting
+some code to only write tests for a certain portion of the file) and
+watch your testing code be written.
+
+![](https://raw.githubusercontent.com/simonpcouch/testhelper/refs/heads/main/inst/figs/testhelper.gif)
