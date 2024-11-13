@@ -31,13 +31,13 @@ Then, ensure that you have an
 [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) environment
 variable set, and you’re ready to go. If you’d like to use an LLM other
 than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the
-testhelper helper, see the `test_helper()` documentation.
+test helper, see the `test_helper()` documentation.
 
 The test helper is interfaced with the via the RStudio addin “testhelper:
 Test R code.” For easiest access, we recommend registering the testhelper
 addin to a keyboard shortcut. **In RStudio**, navigate to
 `Tools > Modify Keyboard Shortcuts > Search "testhelper"`—we suggest
-`Ctrl+Alt+T` (or `Ctrl+Cmd+T` on macOS). The testhelper helper is
+`Ctrl+Alt+T` (or `Ctrl+Cmd+T` on macOS). The test helper is
 currently not available in Positron as Positron has yet to implement
 document `id`s that testhelper needs to toggle between source and test
 files.
