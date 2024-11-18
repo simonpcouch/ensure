@@ -17,13 +17,13 @@
 #'
 #' @export
 test_this <- function() {
-  context <- rstudioapi::getActiveDocumentContext()
+  context <- rstudioapi::getSourceEditorContext()
   test_helper <- retrieve_test_helper()
 
-  # TODO: ensure that the file is a .R file in an `R/` directory
-  turn <- assemble_turn(context)
+  test_lines <- retrieve_test(context$path)
 
-  test_file <- open_test(context$path)
+  # TODO: ensure that the file is a .R file in an `R/` directory
+  turn <- assemble_turn(context, test_lines)
 
   tryCatch(
     stream_inline(
@@ -41,10 +41,11 @@ test_this <- function() {
   invisible(TRUE)
 }
 
-assemble_turn <- function(context) {
+assemble_turn <- function(context, test_lines) {
   # TODO: handle case where there's nothing there, in which case test
   # the whole document
-  paste0(
+
+  res <-
     c(
       "## Context",
       "",
@@ -55,9 +56,24 @@ assemble_turn <- function(context) {
       "## Selection",
       "",
       rstudioapi::primary_selection(context)$text
-    ),
-    collapse = "\n"
-  )
+    )
+
+  # TODO: if there are no tests for the current file, it may still be
+  # nice to include tests from an adjacent file.
+  if (!is.null(test_lines)) {
+    res <- c(
+      res,
+      "",
+      "The current tests look like this:",
+      "",
+      test_lines,
+      "",
+      "Do your best to pattern-match how the existing tests create objects to test against.",
+      ""
+    )
+  }
+
+  paste0(res, collapse = "\n")
 }
 
 # TODO: more variables can be replaced with constants here, and logic

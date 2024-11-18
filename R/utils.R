@@ -14,10 +14,20 @@ retrieve_test_helper <- function() {
   test_helper()
 }
 
-open_test <- function(path) {
+retrieve_test <- function(path) {
   name <- basename(path)
-  res <- file.path("tests", "testthat", paste0("test-", name))
-  usethis::edit_file(res)
+  file <- file.path("tests", "testthat", paste0("test-", name))
 
-  res
+  if (file.exists(file)) {
+    lines <- readLines(file)
+    if (identical(lines, "")) {
+      lines <- NULL
+    }
+  } else {
+    lines <- NULL
+  }
+
+  usethis::edit_file(file)
+
+  lines
 }
