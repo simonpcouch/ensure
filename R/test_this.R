@@ -73,6 +73,13 @@ assemble_turn <- function(context, test_lines) {
 
   res <- append_neighboring_files(context$path, res)
 
+  res <- c(
+    res,
+    "Remember to reply with tests for _only_ the provided selection.",
+    "Respond with only code; do not prefix the reply with any explanation.",
+    "Do not prefix or suffix the code block with backticks."
+  )
+
   paste0(res, collapse = "\n")
 }
 
