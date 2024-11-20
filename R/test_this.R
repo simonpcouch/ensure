@@ -58,8 +58,6 @@ assemble_turn <- function(context, test_lines) {
       rstudioapi::primary_selection(context)$text
     )
 
-  # TODO: if there are no tests for the current file, it may still be
-  # nice to include tests from an adjacent file.
   if (!is.null(test_lines)) {
     res <- c(
       res,
@@ -72,6 +70,8 @@ assemble_turn <- function(context, test_lines) {
       ""
     )
   }
+
+  res <- append_neighboring_files(context$path, res)
 
   paste0(res, collapse = "\n")
 }

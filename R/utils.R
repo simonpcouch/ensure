@@ -31,3 +31,56 @@ retrieve_test <- function(path) {
 
   lines
 }
+
+neighboring_files <- function(dir = "R/") {
+  r_dir_info <- fs::dir_info(dir)
+  r_dir_info <- r_dir_info[order(r_dir_info$modification_time, decreasing = TRUE),]
+  as.character(r_dir_info$path)
+}
+
+append_neighboring_files <- function(path, res) {
+  dir <- dirname(path)
+  neighboring_files <- neighboring_files(dir)
+  if (length(neighboring_files) == 0) {
+    return(res)
+  }
+
+  neighboring_files <- neighboring_files[
+    !basename(neighboring_files) %in% basename(path)
+  ]
+
+  # TODO: need some sort of toggle to determine how many recent files
+  # should be appending, maybe based on n_tokens?
+  for (file in neighboring_files[seq_len(min(length(neighboring_files), 3))]) {
+    file_basename <- basename(file)
+    if (identical(basename(file), basename(path))) next
+
+    res <- c(
+      res,
+      "",
+      paste0("## Some additional context from the file ", basename(file), ":"),
+      "",
+      "```",
+      readLines(file),
+      "```",
+      ""
+    )
+
+    file_test <- file.path("tests", "testthat", paste0("test-", file_basename))
+
+    if (file.exists(file_test)) {
+      res <- c(
+        res,
+        "",
+        paste0("## The tests for that file look like:"),
+        "",
+        "```",
+        readLines(file_test),
+        "```",
+        ""
+      )
+    }
+  }
+
+  res
+}
