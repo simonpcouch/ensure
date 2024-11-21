@@ -84,3 +84,18 @@ append_neighboring_files <- function(path, res) {
 
   res
 }
+
+check_source <- function(path, call = caller_env()) {
+  if (!grepl("\\.R$", path, ignore.case = TRUE)) {
+    cli::cli_abort("Test helpers can only write tests for .R files.", call = call)
+  }
+
+  if (!grepl("^R/", path)) {
+    cli::cli_abort(
+      "The file being tested must be inside of a directory called {.code R/}.",
+      call = call
+    )
+  }
+
+  TRUE
+}

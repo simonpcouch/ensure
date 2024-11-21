@@ -18,11 +18,13 @@
 #' @export
 test_this <- function() {
   context <- rstudioapi::getSourceEditorContext()
+
+  check_source(context$path)
+
   test_helper <- retrieve_test_helper()
 
   test_lines <- retrieve_test(context$path)
 
-  # TODO: ensure that the file is a .R file in an `R/` directory
   turn <- assemble_turn(context, test_lines)
 
   tryCatch(
