@@ -96,7 +96,7 @@ stream_inline <- function(test_helper, turn) {
   stream <- test_helper$stream(turn)
   coro::loop(for (chunk in stream) {
     if (identical(chunk, "")) {next}
-    output_lines <- paste(output_lines, sub("\n$", "", chunk), sep = "")
+    output_lines <- paste(output_lines, chunk, sep = "")
     n_lines <- nchar(gsub("[^\n]+", "", output_lines)) + 1
     if (n_lines < 1) {
       output_padded <-
