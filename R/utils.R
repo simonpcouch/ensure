@@ -1,14 +1,14 @@
-.testhelper_env <- new_environment()
+.assure_env <- new_environment()
 
-testhelper_env <- function() {
-  .testhelper_env
+assure_env <- function() {
+  .assure_env
 }
 
 retrieve_test_helper <- function() {
-  testhelper_env <- testhelper_env()
+  assure_env <- assure_env()
 
-  if (env_has(testhelper_env, "last_test_helper")) {
-    return(env_get(testhelper_env, "last_test_helper"))
+  if (env_has(assure_env, "last_test_helper")) {
+    return(env_get(assure_env, "last_test_helper"))
   }
 
   test_helper()

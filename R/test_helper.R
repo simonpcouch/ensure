@@ -7,11 +7,11 @@
 #'
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
 #'   to [elmer::chat_claude()]. To set a persistent alternative default,
-#'   set the `.testhelper_fn` option; see examples below.
+#'   set the `.assure_fn` option; see examples below.
 #' @param .ns The package that the `new_*()` function is exported from.
 #' @param ... Additional arguments to `fn`. The `system_prompt` argument will
 #'   be ignored if supplied. To set persistent defaults,
-#'   set the `.testhelper_args` option; see examples below.
+#'   set the `.assure_args` option; see examples below.
 #'
 #' @details
 #' If you have an Anthropic API key (or another API key and the `test_helper_*()`
@@ -33,17 +33,17 @@
 #' # following options (possibly in your .Rprofile, if you'd like
 #' # them to persist across sessions):
 #' options(
-#'   .testhelper_fn = "chat_openai",
-#'   .testhelper_args = list(model = "gpt-4o-mini")
+#'   .assure_fn = "chat_openai",
+#'   .assure_args = list(model = "gpt-4o-mini")
 #' )
 #' @export
 test_helper <- function(
-    fn = getOption(".testhelper_fn", default = "chat_claude"),
+    fn = getOption(".assure_fn", default = "chat_claude"),
     ...,
     .ns = "elmer"
   ) {
   args <- list(...)
-  default_args <- getOption(".testhelper_args", default = list())
+  default_args <- getOption(".assure_args", default = list())
   args <- modifyList(default_args, args)
 
   # TODO: just read this once
@@ -57,13 +57,13 @@ test_helper <- function(
 }
 
 test_helper_prompt <- function() {
-  prompt <- readLines(system.file("system_prompt.md", package = "testhelper"))
+  prompt <- readLines(system.file("system_prompt.md", package = "assure"))
 
   paste0(prompt, collapse = "\n")
 }
 
 .stash_last_test_helper <- function(x) {
-  testhelper_env <- testhelper_env()
-  testhelper_env[["last_test_helper"]] <- x
+  assure_env <- assure_env()
+  assure_env[["last_test_helper"]] <- x
   invisible(NULL)
 }

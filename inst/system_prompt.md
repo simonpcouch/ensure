@@ -164,4 +164,3 @@ test_that("check_bool includes argument name in error", {
 ```
 
 The `.R` file context will follow.
-

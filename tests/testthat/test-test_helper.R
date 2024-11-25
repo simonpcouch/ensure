@@ -1,5 +1,5 @@
 test_that("test_helper initializes correctly with defaults", {
-  withr::local_options(list(.testhelper_fn = NULL, .testhelper_args = NULL))
+  withr::local_options(list(.assure_fn = NULL, .assure_args = NULL))
 
   expect_no_error(
     result <- test_helper()
@@ -12,8 +12,8 @@ test_that("test_helper initializes correctly with defaults", {
 test_that("test_helper respects custom options", {
   withr::local_options(
     list(
-      .testhelper_fn = "chat_openai",
-      .testhelper_args = list(model = "gpt-4o-mini")
+      .assure_fn = "chat_openai",
+      .assure_args = list(model = "gpt-4o-mini")
     )
   )
 
