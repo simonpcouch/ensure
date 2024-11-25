@@ -1,30 +1,30 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# assure
+# ensure
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/assure)](https://CRAN.R-project.org/package=assure)
-[![R-CMD-check](https://github.com/simonpcouch/assure/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simonpcouch/assure/actions/workflows/R-CMD-check.yaml)
+status](https://www.r-pkg.org/badges/version/ensure)](https://CRAN.R-project.org/package=ensure)
+[![R-CMD-check](https://github.com/simonpcouch/ensure/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simonpcouch/ensure/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The assure package provides an addin for drafting testthat unit
+The ensure package provides an addin for drafting testthat unit
 testing code using LLMs. Triggering the addin will open a corresponding
-test file and begin writing tests into it. The assure *test helper*
+test file and begin writing tests into it. The ensure *test helper*
 is familiar with testthat 3e as well as tidy style, and incorporates
 context from the rest of your R package to write concise and relevant
 tests.
 
 ## Installation
 
-You can install assure like so:
+You can install ensure like so:
 
 ``` r
-pak::pak("simonpcouch/assure")
+pak::pak("simonpcouch/ensure")
 ```
 
 Then, ensure that you have an
@@ -34,14 +34,14 @@ than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the
 test helper, see the `test_helper()` documentation.
 
 The test helper is interfaced with the via the RStudio addin
-“assure: Test R code.” For easiest access, we recommend registering
-the assure addin to a keyboard shortcut. **In RStudio**, navigate to
-`Tools > Modify Keyboard Shortcuts > Search "assure"`—we suggest
+“ensure: Test R code.” For easiest access, we recommend registering
+the ensure addin to a keyboard shortcut. **In RStudio**, navigate to
+`Tools > Modify Keyboard Shortcuts > Search "ensure"`—we suggest
 `Ctrl+Alt+T` (or `Ctrl+Cmd+T` on macOS). The test helper is currently
 not available in Positron as Positron has yet to implement document
-`id`s that assure needs to toggle between source and test files.
+`id`s that ensure needs to toggle between source and test files.
 
-Once those steps are completed, you’re ready to use the assure addin
+Once those steps are completed, you’re ready to use the ensure addin
 with a keyboard shortcut.
 
 ## Example
@@ -50,4 +50,4 @@ To use the test helper, just trigger the addin (optionally selecting
 some code to only write tests for a certain portion of the file) and
 watch your testing code be written.
 
-![](https://raw.githubusercontent.com/simonpcouch/assure/refs/heads/main/inst/figs/assure.gif)
+![](https://raw.githubusercontent.com/simonpcouch/ensure/refs/heads/main/inst/figs/ensure.gif)

@@ -1,4 +1,4 @@
-Name: assure: Test R code
+Name: ensure: Test R code
 Description: Draft testthat unit tests
 Binding: test_this
 Interactive: false

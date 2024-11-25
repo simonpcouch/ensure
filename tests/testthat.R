@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(assure)
+library(ensure)
 
-test_check("assure")
+test_check("ensure")

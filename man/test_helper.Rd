@@ -5,7 +5,7 @@
 \title{Initialize a test helper object}
 \usage{
 test_helper(
-  fn = getOption(".assure_fn", default = "chat_claude"),
+  fn = getOption(".ensure_fn", default = "chat_claude"),
   ...,
   .ns = "elmer"
 )
@@ -13,11 +13,11 @@ test_helper(
 \arguments{
 \item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
 to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,
-set the \code{.assure_fn} option; see examples below.}
+set the \code{.ensure_fn} option; see examples below.}
 
 \item{...}{Additional arguments to \code{fn}. The \code{system_prompt} argument will
 be ignored if supplied. To set persistent defaults,
-set the \code{.assure_args} option; see examples below.}
+set the \code{.ensure_args} option; see examples below.}
 
 \item{.ns}{The package that the \verb{new_*()} function is exported from.}
 }
@@ -47,8 +47,8 @@ test_helper(
 # following options (possibly in your .Rprofile, if you'd like
 # them to persist across sessions):
 options(
-  .assure_fn = "chat_openai",
-  .assure_args = list(model = "gpt-4o-mini")
+  .ensure_fn = "chat_openai",
+  .ensure_args = list(model = "gpt-4o-mini")
 )
 \dontshow{\}) # examplesIf}
 }
