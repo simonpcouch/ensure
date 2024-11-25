@@ -46,10 +46,8 @@ ensurer <- function(
   default_args <- getOption(".ensure_args", default = list())
   args <- modifyList(default_args, args)
 
-  # TODO: just read this once
-  args$system_prompt <- ensurer_prompt()
-
   ensurer <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))
+  ensurer$set_system_prompt(ensurer_prompt())
 
   .stash_last_ensurer(ensurer)
 

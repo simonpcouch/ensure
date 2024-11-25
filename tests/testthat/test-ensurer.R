@@ -6,7 +6,7 @@ test_that("ensurer initializes correctly with defaults", {
   )
   expect_s3_class(result, "Chat")
 
-  expect_equal(result$system_prompt, ensurer_prompt())
+  expect_equal(result$get_system_prompt(), ensurer_prompt())
 })
 
 test_that("ensurer respects custom options", {
