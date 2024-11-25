@@ -4,14 +4,14 @@ ensure_env <- function() {
   .ensure_env
 }
 
-retrieve_test_helper <- function() {
+retrieve_ensurer <- function() {
   ensure_env <- ensure_env()
 
-  if (env_has(ensure_env, "last_test_helper")) {
-    return(env_get(ensure_env, "last_test_helper"))
+  if (env_has(ensure_env, "last_ensurer")) {
+    return(env_get(ensure_env, "last_ensurer"))
   }
 
-  test_helper()
+  ensurer()
 }
 
 retrieve_test <- function(path) {
@@ -87,7 +87,7 @@ append_neighboring_files <- function(path, res) {
 
 check_source <- function(path, call = caller_env()) {
   if (!grepl("\\.R$", path, ignore.case = TRUE)) {
-    cli::cli_abort("Test helpers can only write tests for .R files.", call = call)
+    cli::cli_abort("ensurers can only write tests for .R files.", call = call)
   }
 
   if (!grepl("/R$", dirname(path))) {

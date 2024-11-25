@@ -1,4 +1,4 @@
 Name: ensure: Test R code
 Description: Draft testthat unit tests
-Binding: test_this
+Binding: ensure_that
 Interactive: false

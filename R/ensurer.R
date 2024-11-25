@@ -1,9 +1,9 @@
-#' Initialize a test helper object
+#' Initialize an ensurer object
 #'
 #' @description
-#' Test helpers are elmer [Chat()][elmer::Chat()]s that know how to write testthat
-#' unit tests. This function creates test helpers, though [test_this()] will create
-#' test helpers it needs on-the-fly.
+#' ensurers are elmer [Chat()][elmer::Chat()]s that know how to write testthat
+#' unit tests. This function creates ensurers, though [ensure_that()] will create
+#' ensurers it needs on-the-fly.
 #'
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
 #'   to [elmer::chat_claude()]. To set a persistent alternative default,
@@ -14,17 +14,17 @@
 #'   set the `.ensure_args` option; see examples below.
 #'
 #' @details
-#' If you have an Anthropic API key (or another API key and the `test_helper_*()`
+#' If you have an Anthropic API key (or another API key and the `ensure_*()`
 #' options) set and this package installed, you are ready to using the addin
 #' in any R session with no setup or library loading required; the addin knows
 #' to look for your API credentials and will call needed functions by itself.
 #'
 #' @examplesIf FALSE
 #' # to create a chat with claude:
-#' test_helper()
+#' ensurer()
 #'
 #' # or with OpenAI's 4o-mini:
-#' test_helper(
+#' ensurer(
 #'   "chat_openai",
 #'   model = "gpt-4o-mini"
 #' )
@@ -37,7 +37,7 @@
 #'   .ensure_args = list(model = "gpt-4o-mini")
 #' )
 #' @export
-test_helper <- function(
+ensurer <- function(
     fn = getOption(".ensure_fn", default = "chat_claude"),
     ...,
     .ns = "elmer"
@@ -47,23 +47,23 @@ test_helper <- function(
   args <- modifyList(default_args, args)
 
   # TODO: just read this once
-  args$system_prompt <- test_helper_prompt()
+  args$system_prompt <- ensurer_prompt()
 
-  test_helper <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))
+  ensurer <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))
 
-  .stash_last_test_helper(test_helper)
+  .stash_last_ensurer(ensurer)
 
-  test_helper
+  ensurer
 }
 
-test_helper_prompt <- function() {
+ensurer_prompt <- function() {
   prompt <- readLines(system.file("system_prompt.md", package = "ensure"))
 
   paste0(prompt, collapse = "\n")
 }
 
-.stash_last_test_helper <- function(x) {
+.stash_last_ensurer <- function(x) {
   ensure_env <- ensure_env()
-  ensure_env[["last_test_helper"]] <- x
+  ensure_env[["last_ensurer"]] <- x
   invisible(NULL)
 }

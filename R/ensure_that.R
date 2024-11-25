@@ -4,7 +4,7 @@
 #' This function queries an LLM to write unit tests for selected R code. To do
 #' so, it:
 #'
-#' * Initializes a [test_helper()]: an elmer [Chat()][elmer::Chat()] that knows how
+#' * Initializes a [ensurer()]: an elmer [Chat()][elmer::Chat()] that knows how
 #'   to write testthat unit tests.
 #' * Reads the contents of the active `.R` file as well as the current selection.
 #' * Opens a corresponding test file (creating it if need be).
@@ -16,12 +16,12 @@
 #' `TRUE`, invisibly.
 #'
 #' @export
-test_this <- function() {
+ensure_that <- function() {
   context <- rstudioapi::getSourceEditorContext()
 
   check_source(context$path)
 
-  test_helper <- retrieve_test_helper()
+  ensurer <- retrieve_ensurer()
 
   test_lines <- retrieve_test(context$path)
 
@@ -29,13 +29,13 @@ test_this <- function() {
 
   tryCatch(
     stream_inline(
-      test_helper = test_helper$clone(),
+      ensurer = ensurer$clone(),
       turn = turn
     ),
     error = function(e) {
       rstudioapi::showDialog(
         "Error",
-        paste("The test_helper ran into an issue: ", e$message)
+        paste("The ensurer ran into an issue: ", e$message)
       )
     }
   )
@@ -87,13 +87,13 @@ assemble_turn <- function(context, test_lines) {
 
 # TODO: more variables can be replaced with constants here, and logic
 # probably simplified further
-stream_inline <- function(test_helper, turn) {
+stream_inline <- function(ensurer, turn) {
   context <- rstudioapi::getSourceEditorContext()
   selection <- context$selection
   selection$range <- initial_range(context)
 
   output_lines <- character(0)
-  stream <- test_helper$stream(turn)
+  stream <- ensurer$stream(turn)
   coro::loop(for (chunk in stream) {
     if (identical(chunk, "")) {next}
     output_lines <- paste(output_lines, chunk, sep = "")

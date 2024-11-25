@@ -3,22 +3,22 @@ test_that("ensure_env works", {
   expect_type(ensure_env(), "environment")
 })
 
-test_that("retrieve_test_helper uses existing helper when available", {
-  if (env_has(.ensure_env, "last_test_helper")) {
-    old_helper <- env_get(.ensure_env, "last_test_helper")
-    withr::defer(env_bind(.ensure_env, last_test_helper = old_helper))
+test_that("retrieve_ensurer uses existing ensurer when available", {
+  if (env_has(.ensure_env, "last_ensurer")) {
+    old_ensurer <- env_get(.ensure_env, "last_ensurer")
+    withr::defer(env_bind(.ensure_env, last_ensurer = old_ensurer))
   }
-  env_bind(.ensure_env, last_test_helper = "boop")
-  expect_equal(retrieve_test_helper(), "boop")
+  env_bind(.ensure_env, last_ensurer = "boop")
+  expect_equal(retrieve_ensurer(), "boop")
 })
 
-test_that("retrieve_test_helper creates a new helper when needed", {
+test_that("retrieve_ensurer creates a new ensurer when needed", {
   local_mocked_bindings(
     ensure_env = function() new_environment()
   )
 
-  expect_equal(retrieve_test_helper(), test_helper())
-  expect_true("last_test_helper" %in% names(.ensure_env))
+  expect_equal(retrieve_ensurer(), ensurer())
+  expect_true("last_ensurer" %in% names(.ensure_env))
 })
 
 test_that("check_source checks R file extensions and paths", {

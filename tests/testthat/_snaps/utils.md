@@ -4,7 +4,7 @@
       check_source("example.txt")
     Condition
       Error:
-      ! Test helpers can only write tests for .R files.
+      ! ensurers can only write tests for .R files.
 
 ---
 
