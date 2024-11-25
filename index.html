@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LLM-assisted unit testing • assure</title>
+<title>LLM-assisted unit testing • ensure</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">assure</a>
+        <a class="navbar-link" href="index.html">ensure</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1</span>
       </span>
     </div>
@@ -45,7 +45,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/simonpcouch/assure/" class="external-link">
+  <a href="https://github.com/simonpcouch/ensure/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
 
   </a>
@@ -63,26 +63,26 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="assure">assure<a class="anchor" aria-label="anchor" href="#assure"></a>
+<div class="page-header"><h1 id="ensure">ensure<a class="anchor" aria-label="anchor" href="#ensure"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p>The assure package provides an addin for drafting testthat unit testing code using LLMs. Triggering the addin will open a corresponding test file and begin writing tests into it. The assure <em>test helper</em> is familiar with testthat 3e as well as tidy style, and incorporates context from the rest of your R package to write concise and relevant tests.</p>
+<p>The ensure package provides an addin for drafting testthat unit testing code using LLMs. Triggering the addin will open a corresponding test file and begin writing tests into it. The ensure <em>test helper</em> is familiar with testthat 3e as well as tidy style, and incorporates context from the rest of your R package to write concise and relevant tests.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install assure like so:</p>
+<p>You can install ensure like so:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"simonpcouch/assure"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"simonpcouch/ensure"</span><span class="op">)</span></span></code></pre></div>
 <p>Then, ensure that you have an <a href="https://console.anthropic.com/" class="external-link"><code>ANTHROPIC_API_KEY</code></a> environment variable set, and you’re ready to go. If you’d like to use an LLM other than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the test helper, see the <code><a href="reference/test_helper.html">test_helper()</a></code> documentation.</p>
-<p>The test helper is interfaced with the via the RStudio addin “assure: Test R code.” For easiest access, we recommend registering the assure addin to a keyboard shortcut. <strong>In RStudio</strong>, navigate to <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "assure"</code>—we suggest <code>Ctrl+Alt+T</code> (or <code>Ctrl+Cmd+T</code> on macOS). The test helper is currently not available in Positron as Positron has yet to implement document <code>id</code>s that assure needs to toggle between source and test files.</p>
-<p>Once those steps are completed, you’re ready to use the assure addin with a keyboard shortcut.</p>
+<p>The test helper is interfaced with the via the RStudio addin “ensure: Test R code.” For easiest access, we recommend registering the ensure addin to a keyboard shortcut. <strong>In RStudio</strong>, navigate to <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "ensure"</code>—we suggest <code>Ctrl+Alt+T</code> (or <code>Ctrl+Cmd+T</code> on macOS). The test helper is currently not available in Positron as Positron has yet to implement document <code>id</code>s that ensure needs to toggle between source and test files.</p>
+<p>Once those steps are completed, you’re ready to use the ensure addin with a keyboard shortcut.</p>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>To use the test helper, just trigger the addin (optionally selecting some code to only write tests for a certain portion of the file) and watch your testing code be written.</p>
-<p><img src="https://raw.githubusercontent.com/simonpcouch/assure/refs/heads/main/inst/figs/assure.gif"></p>
+<p><img src="https://raw.githubusercontent.com/simonpcouch/ensure/refs/heads/main/inst/figs/ensure.gif"></p>
 </div>
 </div>
   </div>
@@ -91,8 +91,8 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/simonpcouch/assure/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/simonpcouch/assure/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/simonpcouch/ensure/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/simonpcouch/ensure/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -116,7 +116,7 @@
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing assure</a></li>
+<li><a href="authors.html#citation">Citing ensure</a></li>
 </ul>
 </div>
 
@@ -131,8 +131,8 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=assure" class="external-link"><img src="https://www.r-pkg.org/badges/version/assure" alt="CRAN status"></a></li>
-<li><a href="https://github.com/simonpcouch/assure/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/simonpcouch/assure/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=ensure" class="external-link"><img src="https://www.r-pkg.org/badges/version/ensure" alt="CRAN status"></a></li>
+<li><a href="https://github.com/simonpcouch/ensure/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/simonpcouch/ensure/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
