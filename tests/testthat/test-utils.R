@@ -29,3 +29,24 @@ test_that("check_source checks R file extensions and paths", {
   expect_snapshot(error = TRUE, check_source("example.txt"))
   expect_snapshot(error = TRUE, check_source("inst/example.R"))
 })
+
+test_that("neighboring_files returns file list in order", {
+  dir <- withr::local_tempdir()
+  dir.create(file.path(dir, "R"))
+
+  files <- c("a.R", "b.R", "c.R")
+  for (i in seq_along(files)) {
+    file <- file.path(dir, "R", files[i])
+    writeLines("", file)
+    Sys.sleep(.1)
+  }
+
+  res <- neighboring_files(file.path(dir, "R"))
+  expect_equal(basename(res), rev(files))
+})
+
+test_that("neighboring_files works with empty directory", {
+  dir <- withr::local_tempdir()
+  dir.create(file.path(dir, "R"))
+  expect_equal(neighboring_files(file.path(dir, "R")), character(0))
+})
