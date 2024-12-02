@@ -44,21 +44,30 @@ ensure_that <- function() {
 }
 
 assemble_turn <- function(context, test_lines) {
-  # TODO: handle case where there's nothing there, in which case test
-  # the whole document
+  selection <- rstudioapi::primary_selection(context)$text
 
-  res <-
-    c(
-      "## Context",
+  if (identical(selection, "")) {
+    res <- c(
+      "## Context and Selection",
       "",
-      context$contents,
+      "The context and selection are the same; write tests for the whole file: ",
       "",
-      "Now, here's the selection you'll write tests for.",
-      "",
-      "## Selection",
-      "",
-      rstudioapi::primary_selection(context)$text
+      context$contents
     )
+  } else {
+    res <-
+      c(
+        "## Context",
+        "",
+        context$contents,
+        "",
+        "Now, here's the selection you'll write tests for.",
+        "",
+        "## Selection",
+        "",
+        selection
+      )
+  }
 
   if (!is.null(test_lines)) {
     res <- c(
