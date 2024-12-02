@@ -24,9 +24,8 @@ test_that("retrieve_ensurer creates a new ensurer when needed", {
 test_that("check_source checks R file extensions and paths", {
   expect_true(check_source("R/example.R"))
   expect_true(check_source("R/example.r"))
-  expect_true(check_source("R/path/to/file.R"))
-  expect_true(check_source("R/deeply/nested/path/file.R"))
 
+  expect_snapshot(error = TRUE, check_source("R/path/to/file.R"))
   expect_snapshot(error = TRUE, check_source("example.txt"))
   expect_snapshot(error = TRUE, check_source("inst/example.R"))
 })

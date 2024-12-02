@@ -90,7 +90,7 @@ check_source <- function(path, call = caller_env()) {
     cli::cli_abort("ensurers can only write tests for .R files.", call = call)
   }
 
-  if (!grepl("/R$", dirname(path))) {
+  if (!grepl("R$", dirname(path))) {
     cli::cli_abort(
       "The file being tested must be inside of a directory called {.code R/}.",
       call = call

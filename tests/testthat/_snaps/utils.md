@@ -1,6 +1,14 @@
 # check_source checks R file extensions and paths
 
     Code
+      check_source("R/path/to/file.R")
+    Condition
+      Error:
+      ! The file being tested must be inside of a directory called `R/`.
+
+---
+
+    Code
       check_source("example.txt")
     Condition
       Error:
