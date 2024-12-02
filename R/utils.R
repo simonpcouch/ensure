@@ -33,9 +33,9 @@ retrieve_test <- function(path) {
 }
 
 neighboring_files <- function(dir = "R/") {
-  r_dir_info <- fs::dir_info(dir)
-  r_dir_info <- r_dir_info[order(r_dir_info$modification_time, decreasing = TRUE),]
-  as.character(r_dir_info$path)
+  files <- list.files(dir, full.names = TRUE)
+  file_info <- file.info(files)
+  files[order(file_info$mtime, decreasing = TRUE)]
 }
 
 append_neighboring_files <- function(path, res) {
