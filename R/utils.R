@@ -27,7 +27,7 @@ retrieve_test <- function(path) {
     lines <- NULL
   }
 
-  usethis::edit_file(file)
+  withr::with_options(list(usethis.quiet = TRUE), usethis::edit_file(file))
 
   lines
 }
