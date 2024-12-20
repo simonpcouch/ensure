@@ -1,12 +1,12 @@
 #' Initialize an ensurer object
 #'
 #' @description
-#' ensurers are elmer [Chat()][elmer::Chat()]s that know how to write testthat
+#' ensurers are ellmer [Chat()][ellmer::Chat()]s that know how to write testthat
 #' unit tests. This function creates ensurers, though [ensure_that()] will create
 #' ensurers it needs on-the-fly.
 #'
-#' @param fn A `new_*()` function, likely from the elmer package. Defaults
-#'   to [elmer::chat_claude()]. To set a persistent alternative default,
+#' @param fn A `new_*()` function, likely from the ellmer package. Defaults
+#'   to [ellmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.ensure_fn` option; see examples below.
 #' @param .ns The package that the `new_*()` function is exported from.
 #' @param ... Additional arguments to `fn`. The `system_prompt` argument will
@@ -40,7 +40,7 @@
 ensurer <- function(
     fn = getOption(".ensure_fn", default = "chat_claude"),
     ...,
-    .ns = "elmer"
+    .ns = "ellmer"
   ) {
   args <- list(...)
   default_args <- getOption(".ensure_args", default = list())

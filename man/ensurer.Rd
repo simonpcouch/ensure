@@ -7,12 +7,12 @@
 ensurer(
   fn = getOption(".ensure_fn", default = "chat_claude"),
   ...,
-  .ns = "elmer"
+  .ns = "ellmer"
 )
 }
 \arguments{
-\item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
-to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,
+\item{fn}{A \verb{new_*()} function, likely from the ellmer package. Defaults
+to \code{\link[ellmer:chat_claude]{ellmer::chat_claude()}}. To set a persistent alternative default,
 set the \code{.ensure_fn} option; see examples below.}
 
 \item{...}{Additional arguments to \code{fn}. The \code{system_prompt} argument will
@@ -22,7 +22,7 @@ set the \code{.ensure_args} option; see examples below.}
 \item{.ns}{The package that the \verb{new_*()} function is exported from.}
 }
 \description{
-ensurers are elmer \link[elmer:Chat]{Chat()}s that know how to write testthat
+ensurers are ellmer \link[ellmer:Chat]{Chat()}s that know how to write testthat
 unit tests. This function creates ensurers, though \code{\link[=ensure_that]{ensure_that()}} will create
 ensurers it needs on-the-fly.
 }

@@ -16,7 +16,7 @@ BugReports: https://github.com/simonpcouch/ensure/issues
 Imports: 
     cli,
     coro,
-    elmer,
+    ellmer,
     rlang,
     rstudioapi,
     usethis
@@ -28,4 +28,4 @@ Suggests:
     tibble,
     withr
 Remotes:
-    hadley/elmer
+    tidyverse/ellmer

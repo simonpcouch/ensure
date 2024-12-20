@@ -13,7 +13,7 @@ ensure_that()
 This function queries an LLM to write unit tests for selected R code. To do
 so, it:
 \itemize{
-\item Initializes a \code{\link[=ensurer]{ensurer()}}: an elmer \link[elmer:Chat]{Chat()} that knows how
+\item Initializes a \code{\link[=ensurer]{ensurer()}}: an ellmer \link[ellmer:Chat]{Chat()} that knows how
 to write testthat unit tests.
 \item Reads the contents of the active \code{.R} file as well as the current selection.
 \item Opens a corresponding test file (creating it if need be).

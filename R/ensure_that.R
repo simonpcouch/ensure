@@ -4,7 +4,7 @@
 #' This function queries an LLM to write unit tests for selected R code. To do
 #' so, it:
 #'
-#' * Initializes a [ensurer()]: an elmer [Chat()][elmer::Chat()] that knows how
+#' * Initializes a [ensurer()]: an ellmer [Chat()][ellmer::Chat()] that knows how
 #'   to write testthat unit tests.
 #' * Reads the contents of the active `.R` file as well as the current selection.
 #' * Opens a corresponding test file (creating it if need be).
