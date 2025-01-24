@@ -19,6 +19,7 @@ Imports:
     ellmer,
     rlang,
     rstudioapi,
+    streamy,
     usethis
 Suggests: 
     gt,
@@ -28,4 +29,4 @@ Suggests:
     tibble,
     withr
 Remotes:
-    tidyverse/ellmer
+    simonpcouch/streamy

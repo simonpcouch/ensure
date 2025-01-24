@@ -25,13 +25,14 @@ ensure_that <- function() {
 
   test_lines <- retrieve_test(context$path)
 
+  # retrieve_test() will navigate to the test file, so:
+  test_context <- rstudioapi::getSourceEditorContext()
+  navigate_to_last_line(test_context)
+
   turn <- assemble_turn(context, test_lines)
 
   tryCatch(
-    stream_inline(
-      ensurer = ensurer$clone(),
-      turn = turn
-    ),
+    streamy::stream(ensurer$stream(turn), interface = "suffix"),
     error = function(e) {
       rstudioapi::showDialog(
         "Error",
@@ -94,58 +95,25 @@ assemble_turn <- function(context, test_lines) {
   paste0(res, collapse = "\n")
 }
 
-# TODO: more variables can be replaced with constants here, and logic
-# probably simplified further
-stream_inline <- function(ensurer, turn) {
-  context <- rstudioapi::getSourceEditorContext()
-  selection <- context$selection
-  selection$range <- initial_range(context)
+navigate_to_last_line <- function(context) {
+  n_lines <- length(context$contents)
 
-  output_lines <- character(0)
-  stream <- ensurer$stream(turn)
-  coro::loop(for (chunk in stream) {
-    if (identical(chunk, "")) {next}
-    output_lines <- paste(output_lines, chunk, sep = "")
-    n_lines <- nchar(gsub("[^\n]+", "", output_lines)) + 1
-    if (n_lines < 1) {
-      output_padded <-
-        paste0(
-          output_lines,
-          paste0(rep("\n", 2 - n_lines), collapse = "")
-        )
-    } else {
-      output_padded <- paste(output_lines, "\n")
-    }
+  # if there's no trailing newline, add one
+  if (!identical(context$contents[length(context$contents)], "")) {
+    last_line_start <- rstudioapi::document_position(n_lines, 1)
+    last_line_end <- rstudioapi::document_position(n_lines, 100000)
 
     rstudioapi::modifyRange(
-      selection$range,
-      output_padded %||% output_lines,
-      selection$id
+      rstudioapi::document_range(last_line_start, last_line_end),
+      paste0(context$contents[n_lines], "\n"),
+      id = context$id
     )
 
-    n_selection <- selection$range$end[[1]] - selection$range$start[[1]]
-    n_lines_res <- nchar(gsub("[^\n]+", "", output_padded %||% output_lines))
-    if (n_selection < n_lines_res) {
-      selection$range$end[["row"]] <- selection$range$start[["row"]] + n_lines_res
-    }
-  })
+    n_lines <- n_lines + 1
+  }
 
-  rstudioapi::setCursorPosition(selection$range$start)
-}
+  new_loc <- rstudioapi::document_position(n_lines, 1)
+  rstudioapi::setSelectionRanges(rstudioapi::document_range(new_loc, new_loc))
 
-initial_range <- function(context) {
-  n_lines <- length(context$contents)
-  last_line_start <- rstudioapi::document_position(n_lines, 1)
-  last_line_end <- rstudioapi::document_position(n_lines, 100000)
-
-  rstudioapi::modifyRange(
-    rstudioapi::document_range(last_line_start, last_line_end),
-    paste0(context$contents[n_lines], "\n"),
-    id = context$id
-  )
-
-  # TODO: set selection to the "right" place in the test file
-  # if it exists--perhaps as an LLM tool call?
-  new_loc <- rstudioapi::document_position(n_lines + 1, 1)
-  rstudioapi::document_range(new_loc, new_loc)
+  invisible()
 }
