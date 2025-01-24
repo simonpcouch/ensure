@@ -99,3 +99,11 @@ check_source <- function(path, call = caller_env()) {
 
   TRUE
 }
+
+check_positron <- function(call = caller_env()) {
+  is_positron <- Sys.getenv("POSITRON") == "1"
+
+  if (is_positron) {
+    cli::cli_abort("{.pkg ensure} is unavailable in Positron.", call = call)
+  }
+}

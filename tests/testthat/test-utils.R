@@ -50,3 +50,8 @@ test_that("neighboring_files works with empty directory", {
   dir.create(file.path(dir, "R"))
   expect_equal(neighboring_files(file.path(dir, "R")), character(0))
 })
+
+test_that("check_positron errors informatively in Positron", {
+  withr::local_envvar(POSITRON = "1")
+  expect_snapshot(check_positron(), error = TRUE)
+})

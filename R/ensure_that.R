@@ -17,6 +17,8 @@
 #'
 #' @export
 ensure_that <- function() {
+  check_positron()
+
   context <- rstudioapi::getSourceEditorContext()
 
   check_source(context$path)
