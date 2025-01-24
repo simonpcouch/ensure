@@ -1,5 +1,6 @@
 pandoc: 3.1.11
 pkgdown: 2.1.1
 pkgdown_sha: ~
-articles: {}
-last_built: 2025-01-24T21:59Z
+articles:
+  ensure: ensure.html
+last_built: 2025-01-24T22:31Z
