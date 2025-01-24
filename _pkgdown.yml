@@ -1,0 +1,11 @@
+url: ~
+template:
+  bootstrap: 5
+
+reference:
+  - title: Reference
+  desc: >
+      _Most ensure users won't need to interface with any package functions directly._
+      _See the [README](https://simonpcouch.github.io/ensure) for an intro to using the package._
+  contents:
+      - matches(".*")
