@@ -12,9 +12,12 @@
 #'   contents of the active `.R` file as context.
 #' * Streams the response into the corresponding test file.
 #'
+#' **Most ensure users will not need to interface with this function directly**.
+#'
 #' @returns
 #' `TRUE`, invisibly.
 #'
+#' @keywords internal
 #' @export
 ensure_that <- function() {
   check_positron()

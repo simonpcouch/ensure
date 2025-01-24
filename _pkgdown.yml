@@ -4,8 +4,8 @@ template:
 
 reference:
   - title: Reference
-  desc: >
+    desc: >
       _Most ensure users won't need to interface with any package functions directly._
-      _See the [README](https://simonpcouch.github.io/ensure) for an intro to using the package._
-  contents:
-      - matches(".*")
+      _See the [Getting Started vignette](https://simonpcouch.github.io/ensure/articles/ensure.html) for an intro to using the package._
+    contents:
+      - starts_with("")

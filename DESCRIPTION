@@ -30,3 +30,4 @@ Suggests:
     withr
 Remotes:
     simonpcouch/streamy
+VignetteBuilder: knitr

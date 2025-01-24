@@ -5,6 +5,8 @@
 #' unit tests. This function creates ensurers, though [ensure_that()] will create
 #' ensurers it needs on-the-fly.
 #'
+#' **Most ensure users will not need to interface with this function directly**.
+#'
 #' @param fn A `new_*()` function, likely from the ellmer package. Defaults
 #'   to [ellmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.ensure_fn` option; see examples below.
@@ -36,6 +38,7 @@
 #'   .ensure_fn = "chat_openai",
 #'   .ensure_args = list(model = "gpt-4o-mini")
 #' )
+#' @keywords internal
 #' @export
 ensurer <- function(
     fn = getOption(".ensure_fn", default = "chat_claude"),

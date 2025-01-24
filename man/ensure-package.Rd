@@ -4,7 +4,7 @@
 \name{ensure-package}
 \alias{ensure}
 \alias{ensure-package}
-\title{ensure: LLM-assisted unit testing}
+\title{ensure}
 \description{
 Supplies an addin that writes 'testthat' unit tests for selected R code.
 }
@@ -21,4 +21,3 @@ Useful links:
 \strong{Maintainer}: Simon Couch \email{simon.couch@posit.co} (\href{https://orcid.org/0000-0001-5676-5107}{ORCID})
 
 }
-\keyword{internal}

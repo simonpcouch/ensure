@@ -21,4 +21,7 @@ to write testthat unit tests.
 contents of the active \code{.R} file as context.
 \item Streams the response into the corresponding test file.
 }
+
+\strong{Most ensure users will not need to interface with this function directly}.
 }
+\keyword{internal}

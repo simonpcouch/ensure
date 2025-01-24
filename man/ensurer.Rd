@@ -25,6 +25,8 @@ set the \code{.ensure_args} option; see examples below.}
 ensurers are ellmer \link[ellmer:Chat]{Chat()}s that know how to write testthat
 unit tests. This function creates ensurers, though \code{\link[=ensure_that]{ensure_that()}} will create
 ensurers it needs on-the-fly.
+
+\strong{Most ensure users will not need to interface with this function directly}.
 }
 \details{
 If you have an Anthropic API key (or another API key and the \verb{ensure_*()}
@@ -52,3 +54,4 @@ options(
 )
 \dontshow{\}) # examplesIf}
 }
+\keyword{internal}

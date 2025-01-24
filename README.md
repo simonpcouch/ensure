@@ -30,7 +30,11 @@ Then, make sure that you have an
 [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) environment
 variable set, and you’re ready to go. If you’d like to use an LLM other
 than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT or a local
-ollama model—to power the ensurer, see the `ensurer()` documentation.
+ollama model—to power the ensurer, set the `.ensure_fn` and
+`.ensure_args` options in your `.Rprofile`, like
+`options(.ensure_fn = "chat_openai")` to use OpenAI’s GPT-4o or
+`options(.ensure_fn = "chat_openai", .ensure_args = list(model = "gpt-4o-mini"))`
+to use their GPT-4o-mini model.
 
 The ensurer is interfaced with the via the RStudio addin “ensure: Test R
 code.” For easiest access, we recommend registering the ensure addin to

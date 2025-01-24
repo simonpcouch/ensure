@@ -1,0 +1,59 @@
+---
+title: "Getting started with ensure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with ensure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The ensure package provides an addin for drafting testthat unit testing code using LLMs. Triggering the addin will open a corresponding test file and begin writing tests into it. The _ensurer_ is familiar with testthat 3e as well as tidy style, and incorporates context from the rest of your R package to write concise and relevant tests.
+
+## Usage
+
+To use the ensurer, just trigger the addin (optionally selecting some code to only write tests for a certain portion of the file) and watch your testing code be written.
+
+```{r}
+#| label: ensure-gif
+#| echo: false
+#| fig-alt: "A screencast of an RStudio session, where the user has a source file open. Several functions in the source file are selected and a keyboard shortcut is pressed, at which point a corresponding test file is created and drafts of unit tests are streamed into the file."
+knitr::include_graphics("https://raw.githubusercontent.com/simonpcouch/ensure/refs/heads/main/inst/figs/ensure.gif")
+```
+
+To get to this point, though, you'll need to choose a model and register the package's addin to a keyboard shortcut.
+
+## Choosing a model
+
+The ensure addin supports any model supported by [ellmer](https://ellmer.tidyverse.org/). When choosing a model for use with ensure, you'll want to the use the most performant model possible that satisfies your privacy needs; ensure automatically passes along your code to your chosen model, so it's especially important to consider data privacy when using LLMs with ensure.
+
+ensure uses the `.ensure_fn` and `.ensure_args` options to configure which model powers the addin. `.ensure_fn` is the name of an ellmer `chat_*()` function as a string, and `.ensure_args` is a list of arguments to pass to that function. For example, to use OpenAI's GPT-4o-mini, you might write `options(.ensure_fn = "chat_openai", .ensure_args = list(model = "gpt-4o-mini"))`. Paste that code in your `.Rprofile` via `usethis::edit_r_profile()` to always use the same model every time you start an R session.
+
+If you're using ellmer inside a organization, you'll be limited to what your IT department allows, which is likely to be one provided by a big cloud provider, e.g. `chat_azure()`, `chat_bedrock()`, `chat_databricks()`, or `chat_snowflake()`. If you're using ellmer for your own exploration, you'll have a lot more freedom, so we have a few recommendations to help you get started:
+
+- As of early 2025, Anthropic's **Claude Sonnet 3.5** is a very powerful model for code assistance, and thus `chat_claude()` is the default model supported by ensure. If you want to use Claude, you'll need to register an [API key](https://console.anthropic.com/) to the environment variable `ANTHROPIC_API_KEY`. No need to set the `.ensure_*` options in this case.
+
+* Regarding OpenAI's models, `chat_openai()` defaults to **GPT-4o**, but you can use `model = "gpt-4o-mini"` for a cheaper, lower-quality model, or `model = "o1-mini"` for more complex reasoning; to use an OpenAI model, you'll need to set the options `options(.ensure_fn = "chat_openai", .ensure_args = list(model = "gpt-4o-mini"))` and register your OpenAI API key with the `OPENAI_API_KEY` environment variable.
+
+- You can use a **local model** with `chat_ollama()`, which uses [Ollama](https://ollama.com) and allows you to run models on your own computer. While the biggest models you can run locally aren't as good as the state of the art hosted models, they don't share your data and are effectively free. To use an ollama model, run the model locally and then set `options(.ensure_fn = "chat_ollama", .ensure_args = list(model = "model-name"))`.
+
+## Registering a keyboard shortcut
+
+The ensurer is interfaced with the via the RStudio addin "ensure: Test R code." For easiest access, we recommend registering the ensure addin to a keyboard shortcut. **In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "ensure"`—we suggest `Ctrl+Alt+T` (or `Ctrl+Cmd+T` on macOS). The ensurer is currently not available in Positron as Positron has yet to implement document `id`s that the package needs to toggle between source and test files.
+
+## Tips and tricks
+
+Knowing a few pieces about how ensure works will help you use it effectively:
+
+* The model is provided with the current contents of your test file. If you find the model is having trouble initializing objects from your package in a reasonable way, write one test in the test file yourself; many models will pattern-match based on your existing code.
+
+* You can test as short of selections of code as you please. Rather than testing whole source files, start off with testing single functions or even single lines of code. Generating tests, editing them to your taste, and _then_ generating tests for new pieces code will give the model a chance to adapt to your style of testing.
+
+<!-- TODO: actually do this -->
+* The model is provided with the contents of your introductory vignette (based on the same rules that pkgdown uses to place a "Get Started" entry in your navbar). If knowing the basics of using your package would be helpful context for drafting unit tests, write that vignette!
