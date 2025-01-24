@@ -49,4 +49,4 @@ To use the ensurer, just trigger the addin (optionally selecting some
 code to only write tests for a certain portion of the file) and watch
 your testing code be written.
 
-![](https://raw.githubusercontent.com/simonpcouch/ensure/refs/heads/main/inst/figs/ensure.gif)
+<img src="https://raw.githubusercontent.com/simonpcouch/ensure/refs/heads/main/inst/figs/ensure.gif" alt="A screencast of an RStudio session, where the user has a source file open. Several functions in the source file are selected and a keyboard shortcut is pressed, at which point a corresponding test file is created and drafts of unit tests are streamed into the file." width="100%" />
